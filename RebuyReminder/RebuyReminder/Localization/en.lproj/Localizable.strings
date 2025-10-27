@@ -1,0 +1,59 @@
+/* English Localization */
+
+/* App Name */
+"app.name" = "Rebuy Reminder";
+"app.tagline" = "Before you run out";
+
+/* Home Screen */
+"home.title" = "Before You Run Out";
+"home.empty.title" = "No items yet";
+"home.empty.subtitle" = "Tap + to add your first item to track";
+
+/* Item Row */
+"item.days_remaining" = "%d days remaining";
+"item.rebuy_now" = "Time to rebuy!";
+"item.rebought" = "Rebought";
+"item.delete" = "Delete";
+
+/* Add Item */
+"add.title" = "Add Item";
+"add.item_name" = "Item name";
+"add.category" = "Category";
+"add.select_category" = "Select category";
+"add.last_purchased" = "Last purchased";
+"add.rebuy_cycle" = "Rebuy cycle: %d days";
+"add.next_reminder" = "Next reminder";
+"add.notes" = "Notes (Optional)";
+"add.cancel" = "Cancel";
+"add.save" = "Save";
+
+/* Categories */
+"category.health" = "Health";
+"category.pantry" = "Pantry";
+"category.personal_care" = "Personal Care";
+"category.household" = "Household";
+"category.pet_care" = "Pet Care";
+"category.other" = "Other";
+
+/* Settings */
+"settings.title" = "Settings";
+"settings.notifications" = "Notifications";
+"settings.enable_reminders" = "Enable Reminders";
+"settings.notification_settings" = "Notification Settings";
+"settings.appearance" = "Appearance";
+"settings.dark_mode" = "Dark Mode";
+"settings.premium" = "Premium";
+"settings.unlock_premium" = "Unlock Premium - ₩4,900";
+"settings.premium_description" = "Unlimited items + Ad-free experience";
+"settings.about" = "About";
+"settings.version" = "Version";
+"settings.privacy_policy" = "Privacy Policy";
+"settings.terms_of_service" = "Terms of Service";
+"settings.contact_support" = "Contact Support";
+"settings.done" = "Done";
+
+/* Notifications */
+"notification.reminder_time" = "Reminder Time";
+"notification.remind_days_before" = "Remind %d days before";
+"notification.description" = "You will receive notifications at the selected time, X days before each item needs to be repurchased.";
+"notification.permission" = "We need permission to send you reminders when it's time to rebuy your items.";
