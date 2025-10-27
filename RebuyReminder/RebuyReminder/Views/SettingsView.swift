@@ -70,9 +70,15 @@ struct SettingsView: View {
     }
 
     private func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+        NotificationService.shared.requestAuthorization { granted, error in
             if let error = error {
                 print("Error requesting notification permission: \(error)")
+            }
+            if !granted {
+                // If permission denied, turn off the toggle
+                DispatchQueue.main.async {
+                    notificationsEnabled = false
+                }
             }
         }
     }

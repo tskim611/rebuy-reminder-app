@@ -80,6 +80,10 @@ struct AddItemView: View {
 
             do {
                 try viewContext.save()
+
+                // Schedule notification for the new item
+                NotificationService.shared.scheduleNotification(for: newItem)
+
                 dismiss()
             } catch {
                 let nsError = error as NSError

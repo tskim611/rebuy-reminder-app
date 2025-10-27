@@ -11,6 +11,7 @@ struct ContentView: View {
 
     @State private var showingAddItem = false
     @State private var showingSettings = false
+    @State private var notificationPermissionGranted = false
 
     var body: some View {
         NavigationView {
@@ -53,8 +54,35 @@ struct ContentView: View {
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }
+            .onAppear {
+                requestNotificationPermissionIfNeeded()
+                updateBadgeCount()
+            }
+            .onChange(of: items.count) { _ in
+                updateBadgeCount()
+            }
         }
         .preferredColorScheme(.dark)
+    }
+
+    private func requestNotificationPermissionIfNeeded() {
+        NotificationService.shared.checkAuthorizationStatus { status in
+            if status == .notDetermined {
+                NotificationService.shared.requestAuthorization { granted, error in
+                    notificationPermissionGranted = granted
+                    if let error = error {
+                        print("❌ Notification permission error: \(error.localizedDescription)")
+                    }
+                }
+            } else {
+                notificationPermissionGranted = (status == .authorized)
+            }
+        }
+    }
+
+    private func updateBadgeCount() {
+        let itemsArray = Array(items)
+        NotificationService.shared.updateBadgeCount(for: itemsArray)
     }
 }
 

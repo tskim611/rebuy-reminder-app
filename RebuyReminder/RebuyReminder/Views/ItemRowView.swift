@@ -81,6 +81,9 @@ struct ItemRowView: View {
 
             do {
                 try viewContext.save()
+
+                // Reschedule notification with new date
+                NotificationService.shared.scheduleNotification(for: item)
             } catch {
                 let nsError = error as NSError
                 print("Error saving context: \(nsError), \(nsError.userInfo)")
@@ -90,6 +93,9 @@ struct ItemRowView: View {
 
     private func deleteItem() {
         withAnimation {
+            // Cancel notification before deleting
+            NotificationService.shared.cancelNotification(for: item)
+
             viewContext.delete(item)
 
             do {
