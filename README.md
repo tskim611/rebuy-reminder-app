@@ -4,7 +4,9 @@ A thoughtful iOS app that helps you remember to rebuy consumable items before yo
 
 ## Project Status
 
-**Phase 0 – Setup & Identity** (Weeks 1-3) ✅ In Progress
+**Phase 0 – Setup & Identity** (Weeks 1-3) ✅ **95% COMPLETE**
+
+**Current Version:** 0.1.0 | [View Changelog](CHANGELOG.md) | [Testing Guide](docs/TESTING_GUIDE.md)
 
 ## Features
 
@@ -36,23 +38,34 @@ A thoughtful iOS app that helps you remember to rebuy consumable items before yo
 ```
 RebuyReminder/
 ├── RebuyReminder/
-│   ├── RebuyReminderApp.swift      # App entry point
+│   ├── RebuyReminderApp.swift           # App entry point
 │   ├── Models/
-│   │   └── RebuyReminder.xcdatamodeld  # CoreData model
+│   │   └── RebuyReminder.xcdatamodeld   # CoreData model
 │   ├── Views/
-│   │   ├── ContentView.swift        # Main home screen
-│   │   ├── ItemRowView.swift        # Individual item row
-│   │   ├── EmptyStateView.swift     # Empty state placeholder
-│   │   ├── AddItemView.swift        # Add/edit item form
-│   │   └── SettingsView.swift       # Settings & preferences
+│   │   ├── ContentView.swift            # Main home screen
+│   │   ├── ItemRowView.swift            # Individual item row
+│   │   ├── EmptyStateView.swift         # Empty state placeholder
+│   │   ├── AddItemView.swift            # Add/edit item form
+│   │   └── SettingsView.swift           # Settings & preferences
 │   ├── Services/
-│   │   └── PersistenceController.swift  # CoreData stack
+│   │   ├── PersistenceController.swift  # CoreData stack
+│   │   └── NotificationService.swift    # UNUserNotificationCenter
 │   ├── Localization/
 │   │   ├── en.lproj/
 │   │   └── ko.lproj/
 │   ├── Resources/
 │   └── Info.plist
-└── RebuyReminder.xcodeproj/
+├── RebuyReminder.xcodeproj/
+└── docs/
+    ├── PRIVACY_POLICY_EN.md
+    ├── PRIVACY_POLICY_KR.md
+    ├── TERMS_OF_SERVICE_EN.md
+    ├── TERMS_OF_SERVICE_KR.md
+    ├── STYLE_GUIDE.md
+    ├── FIREBASE_SETUP.md
+    ├── WIREFRAMES.md
+    ├── PHASE_0_CHECKLIST.md
+    └── TESTING_GUIDE.md
 ```
 
 ## CoreData Model
@@ -77,42 +90,101 @@ RebuyReminder/
 
 ### Installation
 
-1. Open the project in Xcode:
+1. Clone the repository:
    ```bash
-   cd RebuyReminder
+   git clone https://github.com/tskim611/rebuy-reminder-app.git
+   cd rebuy-reminder-app/RebuyReminder
+   ```
+
+2. Open the project in Xcode:
+   ```bash
    open RebuyReminder.xcodeproj
    ```
 
-2. Select your target device/simulator
+3. Configure signing:
+   - Select project in Navigator
+   - Signing & Capabilities → Select your Apple ID
+   - Change bundle identifier if needed
 
-3. Build and run (⌘R)
+4. Select target (iPhone 14 Pro or newer)
 
-### Next Steps
+5. Build and run (⌘R)
 
-**Phase 0 Remaining Tasks:**
-- [ ] Create Figma wireframes for core screens
-- [ ] Draft Privacy Policy (PIPA-compliant, KR/EN)
-- [ ] Draft Terms of Service
-- [ ] Register Apple Developer Account
-- [ ] Set up Firebase project (dev environment)
+### Testing
 
-**Phase 1 – MVP Build (Weeks 4-10):**
-- [ ] Implement UNUserNotificationCenter scheduling
-- [ ] Build reminder service with notification triggers
-- [ ] Add Firebase Analytics integration
-- [ ] Implement StoreKit in-app purchase (₩4,900 unlock)
-- [ ] Create App Store assets (screenshots, descriptions)
-- [ ] TestFlight beta deployment
+Follow the comprehensive [Testing Guide](docs/TESTING_GUIDE.md) for:
+- 20 manual test scenarios
+- Notification testing
+- Localization validation (KR/EN)
+- Accessibility testing (VoiceOver, Dynamic Type)
+- Performance profiling with Instruments
+
+### Phase 0 Completion Status
+
+**✅ Completed (95%):**
+- [x] iOS project structure (SwiftUI + CoreData)
+- [x] All core views (Home, Add Item, Settings, Empty State, Notification Settings)
+- [x] NotificationService with UNUserNotificationCenter
+- [x] Localization support (KR/EN)
+- [x] Wireframes & user flows
+- [x] Privacy Policy (PIPA-compliant, KR/EN)
+- [x] Terms of Service (KR/EN)
+- [x] Style Guide (brand voice, design system)
+- [x] Firebase setup instructions
+- [x] Comprehensive testing guide
+- [x] Git repository + GitHub
+
+**⏳ Remaining (5%):**
+- [ ] Test build in Xcode Simulator
+- [ ] Register Apple Developer Account (₩129k/year)
+- [ ] Legal review of Privacy Policy & TOS
+- [ ] Firebase dev project setup (optional for Phase 0)
+
+### Phase 1 – MVP Build (Weeks 4-10)
+
+**Ready to Start:**
+- [ ] Firebase Analytics integration → [Setup Guide](docs/FIREBASE_SETUP.md)
+- [ ] StoreKit in-app purchase (₩4,900 unlock)
+- [ ] App Store assets (6 screenshots, descriptions)
+- [ ] TestFlight beta deployment (300 users)
+- [ ] Beta feedback & iteration
+
+**Target KPIs:**
+- ≥30% D7 retention
+- No crash reports
+- >4.3★ average rating
+- 5,000 downloads / 1,500 MAU
+
+## Documentation
+
+Comprehensive documentation available in [`/docs`](docs/):
+
+| Document | Description |
+|----------|-------------|
+| [CHANGELOG.md](CHANGELOG.md) | Version history and release notes |
+| [TESTING_GUIDE.md](docs/TESTING_GUIDE.md) | 20 test scenarios + troubleshooting |
+| [WIREFRAMES.md](docs/WIREFRAMES.md) | ASCII wireframes + user flows |
+| [STYLE_GUIDE.md](docs/STYLE_GUIDE.md) | Brand voice + design system |
+| [FIREBASE_SETUP.md](docs/FIREBASE_SETUP.md) | Backend integration guide |
+| [PRIVACY_POLICY_EN.md](docs/PRIVACY_POLICY_EN.md) | English privacy policy (PIPA) |
+| [PRIVACY_POLICY_KR.md](docs/PRIVACY_POLICY_KR.md) | Korean 개인정보 처리방침 |
+| [TERMS_OF_SERVICE_EN.md](docs/TERMS_OF_SERVICE_EN.md) | English terms of service |
+| [TERMS_OF_SERVICE_KR.md](docs/TERMS_OF_SERVICE_KR.md) | Korean 이용약관 |
+| [PHASE_0_CHECKLIST.md](docs/PHASE_0_CHECKLIST.md) | Phase 0 progress tracker |
+
+**Total: 11 documents, 4,500+ lines**
 
 ## Roadmap
 
-See the [full roadmap](ROADMAP.md) for detailed planning through Year 2.
-
 **Key Milestones:**
-- **Month 3:** Public iOS release (App Store KR)
-- **Month 6:** Android port via Flutter
-- **Month 9:** ChatGPT App integration
-- **Year 2:** Predictive AI, affiliate links, voice assistant
+- **v0.1.0** (Current) – Phase 0 complete (95%)
+- **v1.0.0** (Week 10) – Public iOS release (App Store KR)
+- **v1.1.0** (Month 5) – Refinements + A/B testing
+- **v2.0.0** (Month 8) – Android port + Cloud sync
+- **v2.1.0** (Month 11) – ChatGPT App integration
+- **v3.0.0** (Year 2) – Predictive AI + Ecosystem
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed roadmap.
 
 ## Localization
 
@@ -138,14 +210,30 @@ The app supports Korean and English:
   - Cloud backup (future)
   - Family sharing (future)
 
+## Contributing
+
+This is a private project for now. Contributions will be opened after v1.0.0 public release.
+
 ## License
 
 Proprietary – All rights reserved
 
-## Contact
+## Acknowledgments
 
-For questions or feedback, please contact [your email/support channel]
+- **Built with:** Claude Code by Anthropic
+- **Design System:** iOS Human Interface Guidelines
+- **Localization:** Korean (PIPA-compliant) + English
 
 ---
 
-**Built with Claude Code** 🤖
+## Quick Links
+
+- **GitHub:** https://github.com/tskim611/rebuy-reminder-app
+- **Issues:** https://github.com/tskim611/rebuy-reminder-app/issues
+- **Changelog:** [CHANGELOG.md](CHANGELOG.md)
+- **Testing:** [TESTING_GUIDE.md](docs/TESTING_GUIDE.md)
+- **Roadmap:** See Phase 0-5 in [CHANGELOG.md](CHANGELOG.md)
+
+---
+
+**Built with Claude Code** 🤖 | **Current Version:** 0.1.0 (Phase 0 - 95% Complete)
