@@ -1,17 +1,18 @@
 # Project Status - 다 떨어지기 전에
 
-**Last Updated:** 2025-10-27
+**Last Updated:** 2025-10-27 (PM Update)
 **Current Version:** v0.1.0
 **Phase:** 0 (Setup & Identity) - **COMPLETE ✅**
 
 ---
 
-## 🎯 Current Status: READY FOR TESTING
+## 🎯 Current Status: AWAITING XCODE TESTING
 
 **Phase 0 Completion:** 95%
-**Build Status:** ✅ Ready
+**Build Status:** ✅ Ready (Not yet tested in Xcode)
 **Documentation:** ✅ Complete
 **Repository:** ✅ Tagged v0.1.0
+**Code Quality:** ✅ All files implemented
 
 ---
 
@@ -32,36 +33,47 @@
 
 ---
 
-## 🚀 Your Immediate Action Items
+## 🚀 Your Immediate Action Items (This Week)
 
-### 1. Build in Xcode (15 minutes)
+### 🔴 PRIORITY 1: Build in Xcode (15 minutes) - **NOT STARTED**
 ```bash
 cd rebuy-reminder-app/RebuyReminder
 open RebuyReminder.xcodeproj
 ```
-- Select iPhone 14 Pro simulator
-- ⌘R to build and run
-- Verify app launches successfully
+**Action Steps:**
+- Select iPhone 14 Pro simulator (or any available)
+- Press ⌘R to build and run
+- Verify app launches without errors
+- **Expected:** Green build, app shows "빈 목록" (empty state)
 
-### 2. Run Tests (30 minutes)
+**Why This Matters:** This is the first real validation that all code compiles and runs. Until this step is done, we don't know if there are any Xcode configuration issues.
+
+### 🟡 PRIORITY 2: Run Manual Tests (30-60 minutes) - **NOT STARTED**
 Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
-- ✅ Test 1: First launch & permissions
-- ✅ Test 2: Add first item
-- ✅ Test 3: Add multiple items
-- ✅ Test 5: Mark as rebought
-- ✅ Test 6: Swipe to delete
+- [ ] Test 1: First launch & permission request
+- [ ] Test 2: Add first item ("우유", 7 days)
+- [ ] Test 3: Add multiple items with different days
+- [ ] Test 4: Test notification scheduling
+- [ ] Test 5: Mark as rebought (green checkmark)
+- [ ] Test 6: Swipe to delete
+- [ ] Test 7: Language switching (KR ↔ EN)
+- [ ] Test 8: Dark mode (should be default)
 
-### 3. Register Apple Developer (1 hour)
+**Expected Bugs:** Likely 2-5 minor UI or notification issues. This is normal!
+
+### 🟢 PRIORITY 3: Register Apple Developer (1 hour) - **DEFERRED**
 - Go to https://developer.apple.com/programs/
 - Cost: ₩129,000/year
 - Required for: TestFlight, App Store submission
-- **Priority:** High (blocks Phase 1)
+- **When:** After successful Xcode testing
+- **Priority:** High (blocks Phase 1, but not needed yet)
 
-### 4. Legal Review (1-2 weeks)
+### 🔵 PRIORITY 4: Legal Review (1-2 weeks) - **OPTIONAL FOR NOW**
 - Find Korean IP lawyer specializing in PIPA
 - Send: `docs/PRIVACY_POLICY_KR.md` + `TERMS_OF_SERVICE_KR.md`
 - Cost: ₩200,000-500,000
-- **Priority:** Medium (needed before public launch)
+- **When:** Before public TestFlight or App Store
+- **Priority:** Medium (can start Phase 1 without this)
 
 ---
 
@@ -131,17 +143,26 @@ Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
 
 ## 🎯 Next Milestones
 
-### This Week
-- [ ] Build in Xcode (you)
-- [ ] Run test scenarios 1-10 (you)
-- [ ] Register Apple Developer Account
-- [ ] Test on physical device
+### This Week (Week 1 - Oct 27-Nov 2)
+**Code Complete ✅ | Testing Pending ⏳**
 
-### Week 2-3
+- [x] ~~Complete all Swift code~~ (100% done)
+- [x] ~~Complete all documentation~~ (100% done)
+- [x] ~~Push to GitHub with v0.1.0 tag~~ (done)
+- [ ] **🔴 Build in Xcode** ← YOU ARE HERE
+- [ ] **🔴 Fix any build errors**
+- [ ] **🟡 Run test scenarios 1-8** (from TESTING_GUIDE.md)
+- [ ] Document any bugs found in GitHub Issues
+
+**Expected Time:** 1-2 hours total
+**Expected Outcome:** Working app in simulator with 0-5 minor bugs
+
+### Week 2-3 (Nov 3-16) - Bug Fixes & Refinement
+- [ ] Fix all bugs discovered in Week 1
 - [ ] Complete all 20 test scenarios
-- [ ] Fix any discovered bugs
-- [ ] Legal review initiated
-- [ ] Firebase dev project created
+- [ ] Test on physical device (if available)
+- [ ] Register Apple Developer Account
+- [ ] Consider Firebase dev project setup
 
 ### Phase 1 (Weeks 4-10)
 - [ ] Firebase Analytics integration
@@ -154,10 +175,17 @@ Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
 
 ## 🐛 Known Issues
 
-**None!**
+**Status:** Not Yet Tested
 
-No bugs reported yet. Please test and create GitHub Issues for any problems:
-https://github.com/tskim611/rebuy-reminder-app/issues
+**Expected After Xcode Testing:**
+- 0-5 minor bugs (UI alignment, notification timing, localization)
+- Possible: Build warnings or configuration issues
+- Possible: Simulator-specific quirks
+
+**How to Report:**
+Create issues at: https://github.com/tskim611/rebuy-reminder-app/issues
+
+**Current Blockers:** None - ready to test!
 
 ---
 
@@ -367,14 +395,27 @@ git push origin feature/feature-name
 
 ---
 
-## 🚨 Blockers
+## 🚨 Blockers & Risks
 
-**Current:** None! Ready to build.
+**Current Blockers:** ✅ None!
 
-**Upcoming:**
-- Apple Developer Account needed for TestFlight
-- Legal review needed before public launch
-- Physical device helpful for testing (not blocking)
+**Critical Path:**
+1. ✅ Code complete
+2. ⏳ **Xcode build test** ← NEXT STEP
+3. ⏳ Bug fixes (if any)
+4. ⏳ Manual testing (20 scenarios)
+5. ⏳ Apple Developer Account
+6. ⏳ TestFlight prep
+
+**Risk Assessment:**
+- **Low Risk:** Build fails due to Xcode config → Fix in <1 hour
+- **Medium Risk:** 5-10 bugs found → Fix in 2-4 hours
+- **High Risk:** Major architectural issue → Unlikely (code reviewed)
+
+**Dependencies:**
+- Apple Developer Account needed for TestFlight (Week 2-3)
+- Legal review needed before public launch (Week 4-6)
+- Physical device helpful but not blocking
 
 ---
 
