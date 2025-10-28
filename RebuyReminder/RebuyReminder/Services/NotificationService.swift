@@ -45,7 +45,7 @@ class NotificationService {
         guard let rebuyDate = Calendar.current.date(
             byAdding: .day,
             value: Int(item.cycleDays),
-            to: item.lastPurchaseDate
+            to: item.lastPurchaseDate ?? Date()
         ) else {
             print("❌ Cannot calculate rebuy date")
             return
@@ -73,7 +73,7 @@ class NotificationService {
         // Calculate days since last purchase for context
         let daysSincePurchase = Calendar.current.dateComponents(
             [.day],
-            from: item.lastPurchaseDate,
+            from: item.lastPurchaseDate ?? Date(),
             to: Date()
         ).day ?? 0
 
@@ -136,7 +136,7 @@ class NotificationService {
         guard let rebuyDate = Calendar.current.date(
             byAdding: .day,
             value: Int(item.cycleDays),
-            to: item.lastPurchaseDate
+            to: item.lastPurchaseDate ?? Date()
         ) else {
             return
         }
@@ -300,7 +300,7 @@ class NotificationService {
             guard let nextPurchaseDate = Calendar.current.date(
                 byAdding: .day,
                 value: Int(item.cycleDays),
-                to: item.lastPurchaseDate
+                to: item.lastPurchaseDate ?? Date()
             ) else {
                 return false
             }
