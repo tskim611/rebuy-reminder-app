@@ -1,0 +1,59 @@
+/* Korean Localization */
+
+/* App Name */
+"app.name" = "리바이 리마인더";
+"app.tagline" = "다 떨어지기 전에";
+
+/* Home Screen */
+"home.title" = "다 떨어지기 전에";
+"home.empty.title" = "아직 항목이 없습니다";
+"home.empty.subtitle" = "+ 버튼을 눌러 첫 항목을 추가하세요";
+
+/* Item Row */
+"item.days_remaining" = "%d일 남음";
+"item.rebuy_now" = "재구매 시간입니다!";
+"item.rebought" = "재구매함";
+"item.delete" = "삭제";
+
+/* Add Item */
+"add.title" = "항목 추가";
+"add.item_name" = "항목 이름";
+"add.category" = "카테고리";
+"add.select_category" = "카테고리 선택";
+"add.last_purchased" = "마지막 구매일";
+"add.rebuy_cycle" = "재구매 주기: %d일";
+"add.next_reminder" = "다음 알림";
+"add.notes" = "메모 (선택사항)";
+"add.cancel" = "취소";
+"add.save" = "저장";
+
+/* Categories */
+"category.health" = "건강";
+"category.pantry" = "식료품";
+"category.personal_care" = "개인 위생";
+"category.household" = "생활용품";
+"category.pet_care" = "반려동물";
+"category.other" = "기타";
+
+/* Settings */
+"settings.title" = "설정";
+"settings.notifications" = "알림";
+"settings.enable_reminders" = "알림 활성화";
+"settings.notification_settings" = "알림 설정";
+"settings.appearance" = "모양";
+"settings.dark_mode" = "다크 모드";
+"settings.premium" = "프리미엄";
+"settings.unlock_premium" = "프리미엄 잠금 해제 - ₩4,900";
+"settings.premium_description" = "무제한 항목 + 광고 없는 경험";
+"settings.about" = "정보";
+"settings.version" = "버전";
+"settings.privacy_policy" = "개인정보 처리방침";
+"settings.terms_of_service" = "이용약관";
+"settings.contact_support" = "지원 문의";
+"settings.done" = "완료";
+
+/* Notifications */
+"notification.reminder_time" = "알림 시간";
+"notification.remind_days_before" = "%d일 전에 알림";
+"notification.description" = "각 항목을 재구매해야 하는 날로부터 X일 전 선택한 시간에 알림을 받습니다.";
+"notification.permission" = "항목을 재구매할 시간이 되면 알림을 보내기 위해 권한이 필요합니다.";
