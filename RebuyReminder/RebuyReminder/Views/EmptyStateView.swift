@@ -7,12 +7,12 @@ struct EmptyStateView: View {
                 .font(.system(size: 70))
                 .foregroundColor(.gray)
 
-            Text("No items yet")
+            Text(NSLocalizedString("home.empty.title", comment: ""))
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
 
-            Text("Tap + to add your first item to track")
+            Text(NSLocalizedString("home.empty.subtitle", comment: ""))
                 .font(.body)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)

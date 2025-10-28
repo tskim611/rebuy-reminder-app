@@ -11,48 +11,48 @@ struct AddItemView: View {
     @State private var notes = ""
     @State private var lastPurchaseDate = Date()
 
-    let predefinedCategories = ["Health", "Pantry", "Personal Care", "Household", "Pet Care", "Other"]
+    let predefinedCategories = ["category.health", "category.pantry", "category.personal_care", "category.household", "category.pet_care", "category.other"]
 
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Item Details")) {
-                    TextField("Item name", text: $itemName)
+                Section(header: Text("add.title")) {
+                    TextField(NSLocalizedString("add.item_name", comment: ""), text: $itemName)
                         .autocapitalization(.words)
 
-                    Picker("Category", selection: $category) {
-                        Text("Select category").tag("")
+                    Picker(NSLocalizedString("add.category", comment: ""), selection: $category) {
+                        Text(NSLocalizedString("add.select_category", comment: "")).tag("")
                         ForEach(predefinedCategories, id: \.self) { cat in
-                            Text(cat).tag(cat)
+                            Text(NSLocalizedString(cat, comment: "")).tag(cat)
                         }
                     }
 
-                    DatePicker("Last purchased", selection: $lastPurchaseDate, displayedComponents: .date)
+                    DatePicker(NSLocalizedString("add.last_purchased", comment: ""), selection: $lastPurchaseDate, displayedComponents: .date)
                 }
 
-                Section(header: Text("Reminder Settings")) {
-                    Stepper("Rebuy cycle: \(cycleDays) days", value: $cycleDays, in: 1...365)
+                Section {
+                    Stepper(String(format: NSLocalizedString("add.rebuy_cycle", comment: ""), cycleDays), value: $cycleDays, in: 1...365)
 
-                    Text("Next reminder: \(nextReminderDate, style: .date)")
+                    Text(String(format: NSLocalizedString("add.next_reminder", comment: ""), nextReminderDate, style: .date))
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
 
-                Section(header: Text("Notes (Optional)")) {
+                Section(header: Text(NSLocalizedString("add.notes", comment: ""))) {
                     TextEditor(text: $notes)
                         .frame(height: 80)
                 }
             }
-            .navigationTitle("Add Item")
+            .navigationTitle(NSLocalizedString("add.title", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button(NSLocalizedString("add.cancel", comment: "")) {
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                    Button(NSLocalizedString("add.save", comment: "")) {
                         saveItem()
                     }
                     .disabled(itemName.isEmpty)

@@ -38,7 +38,7 @@ struct ItemRowView: View {
                         .foregroundColor(.gray)
                 }
 
-                Text(daysUntilRebuy <= 0 ? "Time to rebuy!" : "\(daysUntilRebuy) days remaining")
+                Text(daysUntilRebuy <= 0 ? NSLocalizedString("item.rebuy_now", comment: "") : String(format: NSLocalizedString("item.days_remaining", comment: ""), daysUntilRebuy))
                     .font(.subheadline)
                     .foregroundColor(statusColor)
             }
@@ -49,7 +49,7 @@ struct ItemRowView: View {
             Button(action: {
                 markAsRebought()
             }) {
-                Text("Rebought")
+                Text(NSLocalizedString("item.rebought", comment: ""))
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -66,7 +66,7 @@ struct ItemRowView: View {
             Button(role: .destructive) {
                 deleteItem()
             } label: {
-                Label("Delete", systemImage: "trash")
+                Label(NSLocalizedString("item.delete", comment: ""), systemImage: "trash")
             }
         }
     }
