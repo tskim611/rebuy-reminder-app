@@ -33,9 +33,13 @@ struct AddItemView: View {
                 Section {
                     Stepper(String(format: NSLocalizedString("add.rebuy_cycle", comment: ""), cycleDays), value: $cycleDays, in: 1...365)
 
-                    Text(String(format: NSLocalizedString("add.next_reminder", comment: ""), nextReminderDate, style: .date))
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    HStack {
+                        Text(NSLocalizedString("add.next_reminder", comment: ""))
+                        Spacer()
+                        Text(nextReminderDate, style: .date)
+                    }
+                    .font(.caption)
+                    .foregroundColor(.gray)
                 }
 
                 Section(header: Text(NSLocalizedString("add.notes", comment: ""))) {
