@@ -84,27 +84,6 @@ struct SettingsView: View {
     }
 }
 
-struct NotificationSettingsView: View {
-    @AppStorage("reminderTime") private var reminderTime = Date()
-    @AppStorage("reminderDaysBefore") private var reminderDaysBefore = 3
-
-    var body: some View {
-        Form {
-            Section(header: Text("Reminder Timing")) {
-                DatePicker("Reminder Time", selection: $reminderTime, displayedComponents: .hourAndMinute)
-
-                Stepper("Remind \(reminderDaysBefore) days before", value: $reminderDaysBefore, in: 0...30)
-            }
-
-            Section(footer: Text("You will receive notifications at the selected time, X days before each item needs to be repurchased.")) {
-                EmptyView()
-            }
-        }
-        .navigationTitle("Notification Settings")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
