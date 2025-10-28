@@ -6,7 +6,7 @@ struct ItemRowView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     var daysUntilRebuy: Int {
-        let nextPurchaseDate = Calendar.current.date(byAdding: .day, value: Int(item.cycleDays), to: item.lastPurchaseDate) ?? Date()
+        let nextPurchaseDate = Calendar.current.date(byAdding: .day, value: Int(item.cycleDays), to: item.lastPurchaseDate ?? Date()) ?? Date()
         return Calendar.current.dateComponents([.day], from: Date(), to: nextPurchaseDate).day ?? 0
     }
 
