@@ -21,14 +21,16 @@ struct ContentView: View {
                 if items.isEmpty {
                     EmptyStateView()
                 } else {
-                    ScrollView {
-                        LazyVStack(spacing: 12) {
-                            ForEach(items) { item in
-                                ItemRowView(item: item)
-                            }
+                    List {
+                        ForEach(items) { item in
+                            ItemRowView(item: item)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
                         }
-                        .padding()
+                        .onDelete(perform: deleteItems)
                     }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
                 }
             }
             .navigationTitle("다 떨어지기 전에")
@@ -83,6 +85,25 @@ struct ContentView: View {
     private func updateBadgeCount() {
         let itemsArray = Array(items)
         NotificationService.shared.updateBadgeCount(for: itemsArray)
+    }
+
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { items[$0] }.forEach { item in
+                // Cancel notifications for this item
+                NotificationService.shared.cancelNotification(for: item)
+
+                // Delete from CoreData
+                viewContext.delete(item)
+            }
+
+            do {
+                try viewContext.save()
+                updateBadgeCount()
+            } catch {
+                print("❌ Error deleting item: \(error.localizedDescription)")
+            }
+        }
     }
 }
 

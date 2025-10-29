@@ -11,7 +11,7 @@ struct AddItemView: View {
     @State private var notes = ""
     @State private var lastPurchaseDate = Date()
 
-    let predefinedCategories = ["category.health", "category.pantry", "category.personal_care", "category.household", "category.pet_care", "category.other"]
+    let predefinedCategories = ["health", "pantry", "personal_care", "household", "pet_care", "other"]
 
     var body: some View {
         NavigationView {
@@ -23,7 +23,7 @@ struct AddItemView: View {
                     Picker(NSLocalizedString("add.category", comment: ""), selection: $category) {
                         Text(NSLocalizedString("add.select_category", comment: "")).tag("")
                         ForEach(predefinedCategories, id: \.self) { cat in
-                            Text(NSLocalizedString(cat, comment: "")).tag(cat)
+                            Text(NSLocalizedString("category.\(cat)", comment: "")).tag(cat)
                         }
                     }
 

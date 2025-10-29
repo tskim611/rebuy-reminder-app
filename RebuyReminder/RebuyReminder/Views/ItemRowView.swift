@@ -33,7 +33,8 @@ struct ItemRowView: View {
                     .foregroundColor(.white)
 
                 if let category = item.category, !category.isEmpty {
-                    Text(category)
+                    let categoryKey = category.hasPrefix("category.") ? category : "category.\(category)"
+                    Text(NSLocalizedString(categoryKey, comment: ""))
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
@@ -62,13 +63,6 @@ struct ItemRowView: View {
         .padding()
         .background(Color(.systemGray6).opacity(0.3))
         .cornerRadius(12)
-        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(role: .destructive) {
-                deleteItem()
-            } label: {
-                Label(NSLocalizedString("item.delete", comment: ""), systemImage: "trash")
-            }
-        }
     }
 
     private func markAsRebought() {
@@ -91,19 +85,4 @@ struct ItemRowView: View {
         }
     }
 
-    private func deleteItem() {
-        withAnimation {
-            // Cancel notification before deleting
-            NotificationService.shared.cancelNotification(for: item)
-
-            viewContext.delete(item)
-
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                print("Error deleting item: \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
 }
