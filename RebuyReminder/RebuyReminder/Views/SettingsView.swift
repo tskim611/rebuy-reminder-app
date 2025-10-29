@@ -8,60 +8,60 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Notifications")) {
-                    Toggle("Enable Reminders", isOn: $notificationsEnabled)
+                Section(header: Text("settings.notifications")) {
+                    Toggle("settings.enable_reminders", isOn: $notificationsEnabled)
                         .onChange(of: notificationsEnabled) { newValue in
                             if newValue {
                                 requestNotificationPermission()
                             }
                         }
 
-                    NavigationLink("Notification Settings") {
+                    NavigationLink("settings.notification_settings") {
                         NotificationSettingsView()
                     }
                 }
 
-                Section(header: Text("Appearance")) {
-                    Toggle("Dark Mode", isOn: $darkModeEnabled)
+                Section(header: Text("settings.appearance")) {
+                    Toggle("settings.dark_mode", isOn: $darkModeEnabled)
                 }
 
-                Section(header: Text("Premium")) {
-                    Button("Unlock Premium - ₩4,900") {
+                Section(header: Text("settings.premium")) {
+                    Button("settings.unlock_premium") {
                         // TODO: Implement StoreKit purchase
                     }
                     .foregroundColor(.blue)
 
-                    Text("Unlimited items + Ad-free experience")
+                    Text("settings.premium_description")
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
 
-                Section(header: Text("About")) {
+                Section(header: Text("settings.about")) {
                     HStack {
-                        Text("Version")
+                        Text("settings.version")
                         Spacer()
                         Text("1.0.0")
                             .foregroundColor(.gray)
                     }
 
-                    Button("Privacy Policy") {
+                    Button("settings.privacy_policy") {
                         // TODO: Show privacy policy
                     }
 
-                    Button("Terms of Service") {
+                    Button("settings.terms_of_service") {
                         // TODO: Show TOS
                     }
 
-                    Button("Contact Support") {
+                    Button("settings.contact_support") {
                         // TODO: Open email or support
                     }
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("settings.title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button("settings.done") {
                         dismiss()
                     }
                 }
