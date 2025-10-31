@@ -59,3 +59,14 @@
 "notification.remind_days_before" = "Remind %d days before";
 "notification.description" = "You will receive notifications at the selected time, X days before each item needs to be repurchased.";
 "notification.permission" = "We need permission to send you reminders when it's time to rebuy your items.";
+
+/* Onboarding */
+"onboarding.skip" = "Skip";
+"onboarding.next" = "Next";
+"onboarding.get_started" = "Get Started";
+"onboarding.page1.title" = "Before You Run Out";
+"onboarding.page1.description" = "Get reminded before your essentials run out. Never forget to restock what you need.";
+"onboarding.page2.title" = "Custom Rebuy Cycles";
+"onboarding.page2.description" = "Set different repurchase cycles for each item. Shampoo every 30 days, toilet paper every 60 days - you decide.";
+"onboarding.page3.title" = "Smart Reminders";
+"onboarding.page3.description" = "Receive timely notifications to restock with ease. No more last-minute store runs.";

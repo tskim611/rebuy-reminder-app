@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var showingAddItem = false
     @State private var showingSettings = false
     @State private var notificationPermissionGranted = false
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+    @State private var showingOnboarding = false
 
     var body: some View {
         NavigationView {
@@ -56,7 +58,16 @@ struct ContentView: View {
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }
+            .fullScreenCover(isPresented: $showingOnboarding) {
+                OnboardingView(isPresented: $showingOnboarding)
+                    .onDisappear {
+                        hasSeenOnboarding = true
+                    }
+            }
             .onAppear {
+                if !hasSeenOnboarding {
+                    showingOnboarding = true
+                }
                 requestNotificationPermissionIfNeeded()
                 updateBadgeCount()
             }

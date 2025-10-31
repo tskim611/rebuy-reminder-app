@@ -59,3 +59,14 @@
 "notification.remind_days_before" = "%d일 전에 알림";
 "notification.description" = "각 항목을 재구매해야 하는 날로부터 X일 전 선택한 시간에 알림을 받습니다.";
 "notification.permission" = "항목을 재구매할 시간이 되면 알림을 보내기 위해 권한이 필요합니다.";
+
+/* Onboarding */
+"onboarding.skip" = "건너뛰기";
+"onboarding.next" = "다음";
+"onboarding.get_started" = "시작하기";
+"onboarding.page1.title" = "다 떨어지기 전에";
+"onboarding.page1.description" = "생필품이 다 떨어지기 전에 미리 알림을 받아보세요. 더 이상 필요한 물건을 잊지 마세요.";
+"onboarding.page2.title" = "맞춤형 재구매 주기";
+"onboarding.page2.description" = "각 항목마다 다른 재구매 주기를 설정하세요. 샴푸는 30일, 휴지는 60일, 자유롭게 설정할 수 있습니다.";
+"onboarding.page3.title" = "스마트 알림";
+"onboarding.page3.description" = "제때 알림을 받아 여유있게 재구매하세요. 더 이상 급하게 사러 가지 않아도 됩니다.";
