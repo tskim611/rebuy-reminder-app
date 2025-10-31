@@ -22,6 +22,8 @@
 "add.select_category" = "카테고리 선택";
 "add.last_purchased" = "마지막 구매일";
 "add.rebuy_cycle" = "재구매 주기: %d일";
+"add.rebuy_cycle_label" = "재구매 주기";
+"add.days_unit" = "일";
 "add.next_reminder" = "다음 알림";
 "add.notes" = "메모 (선택사항)";
 "add.cancel" = "취소";
@@ -30,7 +32,7 @@
 /* Categories */
 "category.health" = "건강";
 "category.pantry" = "식료품";
-"category.personal_care" = "개인 위생";
+"category.personal_care" = "미용 & 개인위생";
 "category.household" = "생활용품";
 "category.pet_care" = "반려동물";
 "category.other" = "기타";

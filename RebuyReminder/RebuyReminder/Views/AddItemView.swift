@@ -31,7 +31,19 @@ struct AddItemView: View {
                 }
 
                 Section {
-                    Stepper(String(format: NSLocalizedString("add.rebuy_cycle", comment: ""), cycleDays), value: $cycleDays, in: 1...365)
+                    HStack {
+                        Text(NSLocalizedString("add.rebuy_cycle_label", comment: ""))
+                        Spacer()
+                        TextField("", value: $cycleDays, format: .number)
+                            .keyboardType(.numberPad)
+                            .multilineTextAlignment(.trailing)
+                            .frame(width: 60)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text(NSLocalizedString("add.days_unit", comment: ""))
+                    }
+
+                    Stepper("", value: $cycleDays, in: 1...365)
+                        .labelsHidden()
 
                     HStack {
                         Text(NSLocalizedString("add.next_reminder", comment: ""))

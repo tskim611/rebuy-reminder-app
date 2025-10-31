@@ -22,6 +22,8 @@
 "add.select_category" = "Select category";
 "add.last_purchased" = "Last purchased";
 "add.rebuy_cycle" = "Rebuy cycle: %d days";
+"add.rebuy_cycle_label" = "Rebuy cycle";
+"add.days_unit" = "days";
 "add.next_reminder" = "Next reminder";
 "add.notes" = "Notes (Optional)";
 "add.cancel" = "Cancel";
@@ -30,7 +32,7 @@
 /* Categories */
 "category.health" = "Health";
 "category.pantry" = "Pantry";
-"category.personal_care" = "Personal Care";
+"category.personal_care" = "Beauty & Personal Care";
 "category.household" = "Household";
 "category.pet_care" = "Pet Care";
 "category.other" = "Other";
