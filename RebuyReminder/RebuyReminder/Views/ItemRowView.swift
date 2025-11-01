@@ -72,10 +72,16 @@ struct ItemRowView: View {
                     .background(Color.blue)
                     .cornerRadius(8)
             }
+            .buttonStyle(.plain)
         }
         .padding()
         .background(Color(.systemGray6).opacity(0.3))
         .cornerRadius(12)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            // Do nothing - prevents the entire card from being tappable
+            // Only the button should trigger the rebuy action
+        }
     }
 
     private func markAsRebought() {
