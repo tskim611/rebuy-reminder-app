@@ -6,8 +6,21 @@ struct ItemRowView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     var daysUntilRebuy: Int {
-        let nextPurchaseDate = Calendar.current.date(byAdding: .day, value: Int(item.cycleDays), to: item.lastPurchaseDate ?? Date()) ?? Date()
-        return Calendar.current.dateComponents([.day], from: Date(), to: nextPurchaseDate).day ?? 0
+        // Use KST (Korea Standard Time) for date calculations
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
+
+        // Get today's date at midnight KST
+        let today = calendar.startOfDay(for: Date())
+
+        // Get last purchase date at midnight KST
+        let lastPurchase = calendar.startOfDay(for: item.lastPurchaseDate ?? Date())
+
+        // Calculate next purchase date
+        let nextPurchaseDate = calendar.date(byAdding: .day, value: Int(item.cycleDays), to: lastPurchase) ?? today
+
+        // Calculate days difference
+        return calendar.dateComponents([.day], from: today, to: nextPurchaseDate).day ?? 0
     }
 
     var statusColor: Color {
