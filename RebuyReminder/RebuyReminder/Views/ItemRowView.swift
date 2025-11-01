@@ -1,6 +1,15 @@
 import SwiftUI
 import CoreData
 
+// Custom button style with scale animation
+struct ScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.92 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
+
 struct ItemRowView: View {
     @ObservedObject var item: Item
     @Environment(\.managedObjectContext) private var viewContext
@@ -72,7 +81,7 @@ struct ItemRowView: View {
                     .background(Color.blue)
                     .cornerRadius(8)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(ScaleButtonStyle())
         }
         .padding()
         .background(Color(.systemGray6).opacity(0.3))

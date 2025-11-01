@@ -24,10 +24,15 @@ struct ContentView: View {
                     EmptyStateView()
                 } else {
                     List {
-                        ForEach(items) { item in
+                        ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                             ItemRowView(item: item)
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                    removal: .scale.combined(with: .opacity)
+                                ))
+                                .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.05), value: items.count)
                         }
                         .onDelete(perform: deleteItems)
                     }
