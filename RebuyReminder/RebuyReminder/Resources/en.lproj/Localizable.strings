@@ -70,3 +70,16 @@
 "onboarding.page2.description" = "Set different repurchase cycles for each item. Shampoo every 30 days, toilet paper every 60 days - you decide.";
 "onboarding.page3.title" = "Smart Reminders";
 "onboarding.page3.description" = "Receive timely notifications to restock with ease. No more last-minute store runs.";
+
+/* New UI Redesign Strings */
+"app.title" = "Rebuy Reminder";
+"tab.board" = "Board";
+"tab.settings" = "Settings";
+"button.addItem" = "Add Item";
+"label.daysLeft" = "%d days left";
+"label.overdue" = "Overdue!";
+"label.restocked" = "Rebought";
+"label.deleted" = "Item deleted";
+"label.undo" = "Undo";
+"empty.allStocked" = "Everything stocked — nice 👌";
+"hint.swipeDelete" = "Swipe left to delete";
