@@ -1,18 +1,19 @@
 # Project Status - 다 떨어지기 전에
 
-**Last Updated:** 2025-10-27 (PM Update)
-**Current Version:** v0.1.0
-**Phase:** 0 (Setup & Identity) - **COMPLETE ✅**
+**Last Updated:** 2025-11-03
+**Current Version:** Build 11 (In Testing)
+**Phase:** 0.5 (UI Redesign) - **IN PROGRESS 🔄**
 
 ---
 
-## 🎯 Current Status: AWAITING XCODE TESTING
+## 🎯 Current Status: DEBUGGING BUILD 11
 
-**Phase 0 Completion:** 95%
-**Build Status:** ✅ Ready (Not yet tested in Xcode)
+**Phase 0 Completion:** 100% ✅
+**Phase 0.5 (UI Redesign):** 85% (2 critical bugs)
+**Build Status:** ⚠️ Build 11 on TestFlight (bugs present)
 **Documentation:** ✅ Complete
-**Repository:** ✅ Tagged v0.1.0
-**Code Quality:** ✅ All files implemented
+**Repository:** ✅ Feature branch pushed
+**Code Quality:** ⚠️ Needs debugging
 
 ---
 
@@ -20,33 +21,35 @@
 
 | Area | Status | Progress |
 |------|--------|----------|
-| **iOS App** | ✅ Complete | 100% |
-| **Notifications** | ✅ Complete | 100% |
-| **Localization** | ✅ Complete | 100% |
-| **Documentation** | ✅ Complete | 100% |
-| **Testing Docs** | ✅ Complete | 100% |
+| **Phase 0 (Original App)** | ✅ Complete | 100% |
+| **Build 9 (TestFlight)** | ✅ Shipped | 100% |
+| **UI Redesign (Cards)** | ⚠️ In Progress | 85% |
+| **Build 10 (TestFlight)** | ❌ Failed | Broken |
+| **Build 11 (TestFlight)** | ❌ Failed | Broken |
+| **Critical Bug #1** | ❌ Blocking | Add item doesn't work |
+| **Critical Bug #2** | ❌ Blocking | Icons all show box 📦 |
+| **Apple Dev Account** | ✅ Active | 100% |
+| **TestFlight Setup** | ✅ Active | 100% |
 | **Git/GitHub** | ✅ Complete | 100% |
-| **Xcode Testing** | ⏳ Pending | 0% |
-| **Apple Dev Account** | ⏳ Pending | 0% |
-| **Legal Review** | ⏳ Pending | 0% |
-| **Firebase Setup** | ⏳ Optional | 0% |
 
 ---
 
-## 🚀 Your Immediate Action Items (This Week)
+## 🚀 Immediate Action Items (Tomorrow)
 
-### 🔴 PRIORITY 1: Build in Xcode (15 minutes) - **NOT STARTED**
-```bash
-cd rebuy-reminder-app/RebuyReminder
-open RebuyReminder.xcodeproj
-```
-**Action Steps:**
-- Select iPhone 14 Pro simulator (or any available)
-- Press ⌘R to build and run
-- Verify app launches without errors
-- **Expected:** Green build, app shows "빈 목록" (empty state)
+### 🔴 CRITICAL: Fix 2 Blocking Bugs (Build 12)
 
-**Why This Matters:** This is the first real validation that all code compiles and runs. Until this step is done, we don't know if there are any Xcode configuration issues.
+**Bug #1: Add Item Doesn't Refresh UI**
+- Status: ❌ NotificationCenter pattern didn't work
+- Tested: Build 11 on real device (iPhone)
+- Next Approach: Try @FetchRequest or manual fetch trigger
+- Priority: P0 - Blocks all testing
+
+**Bug #2: All Items Show Box Icon (📦)**
+- Status: ❌ Icon mapping not working
+- Expected: 💊 🥛 🧴 🧻 🐾 📦
+- Actual: 📦 📦 📦 📦 📦 📦
+- Debug logs not appearing
+- Priority: P0 - Blocks visual validation
 
 ### 🟡 PRIORITY 2: Run Manual Tests (30-60 minutes) - **NOT STARTED**
 Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
@@ -175,17 +178,41 @@ Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
 
 ## 🐛 Known Issues
 
-**Status:** Not Yet Tested
+**Status:** Build 11 - 2 Critical Bugs Found
 
-**Expected After Xcode Testing:**
-- 0-5 minor bugs (UI alignment, notification timing, localization)
-- Possible: Build warnings or configuration issues
-- Possible: Simulator-specific quirks
+### Critical (P0) - Blocking Release
 
-**How to Report:**
-Create issues at: https://github.com/tskim611/rebuy-reminder-app/issues
+**Bug #1: Add Item Doesn't Refresh UI**
+- **Severity:** P0 (app unusable)
+- **Description:** When user adds a new item and taps Save, the item doesn't appear in the board list. Item only appears after restarting the app.
+- **Tested On:** Build 10 (Simulator), Build 11 (Real iPhone)
+- **Root Cause:** Unknown - NotificationCenter pattern didn't work
+- **Attempted Fixes:**
+  1. ✗ Sheet `.onDismiss` callback
+  2. ✗ Sheet `.onChange` with delay
+  3. ✗ Sheet `.onDisappear` with DispatchQueue delay
+  4. ✗ Same viewContext consistency
+  5. ✗ NotificationCenter.default.post pattern
+- **Debug Notes:** Item IS saved to CoreData (confirmed), but @Published items array doesn't update
+- **Next Steps:** Try @FetchRequest or objectWillChange.send()
 
-**Current Blockers:** None - ready to test!
+**Bug #2: All Items Show Box Icon (📦)**
+- **Severity:** P0 (visual validation blocked)
+- **Description:** All items display the default box icon regardless of category selection
+- **Expected:** Health=💊, Pantry=🥛, Personal Care=🧴, Household=🧻, Pet=🐾, Other=📦
+- **Actual:** All items show 📦
+- **Tested On:** Build 10 (Simulator), Build 11 (Real iPhone)
+- **Root Cause:** Unknown - Debug logs (🎨) never appear in console
+- **Theory:** `ItemModel.iconForCategory()` might not be called at all
+- **Next Steps:** Add breakpoints, check ItemCard rendering path
+
+### Attempted Fixes Summary (Build 9 → Build 11)
+- **Build 9:** Original UI (worked perfectly)
+- **Build 10:** UI redesign + bugs discovered
+- **Build 11:** NotificationCenter fix (still broken)
+- **Build 12:** TBD (tomorrow's debugging session)
+
+**Current Blockers:** Cannot proceed with UI redesign until these 2 bugs are fixed
 
 ---
 
