@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 
 struct BoardView: View {
     @StateObject private var vm: BoardViewModel
@@ -9,7 +10,7 @@ struct BoardView: View {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @State private var showingOnboarding = false
 
-    init(context: NSManagedObjectContext = PersistenceController.shared.container.viewContext) {
+    init(context: CoreData.NSManagedObjectContext = PersistenceController.shared.container.viewContext) {
         _vm = StateObject(wrappedValue: BoardViewModel(context: context))
     }
 
