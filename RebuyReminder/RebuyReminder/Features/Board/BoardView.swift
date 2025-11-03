@@ -10,7 +10,10 @@ struct BoardView: View {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @State private var showingOnboarding = false
 
+    private let viewContext: NSManagedObjectContext
+
     init(context: CoreData.NSManagedObjectContext = PersistenceController.shared.container.viewContext) {
+        self.viewContext = context
         _vm = StateObject(wrappedValue: BoardViewModel(context: context))
     }
 
@@ -101,12 +104,12 @@ struct BoardView: View {
             }
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
+                    .environment(\.managedObjectContext, viewContext)
             }
             .onChange(of: showingAddItem) { isShowing in
                 if !isShowing {
                     // Sheet was dismissed, reload items
-                    Task {
-                        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 second delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         vm.loadItems()
                     }
                 }
