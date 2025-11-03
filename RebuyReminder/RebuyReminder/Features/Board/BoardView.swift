@@ -101,6 +101,8 @@ struct BoardView: View {
             }
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
+            } onDismiss: {
+                vm.loadItems() // Reload items when add sheet closes
             }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
@@ -117,6 +119,7 @@ struct BoardView: View {
                 }
                 requestNotificationPermissionIfNeeded()
                 updateBadgeCount()
+                vm.loadItems() // Reload items when view appears
             }
             .onChange(of: vm.items.count) { _ in
                 updateBadgeCount()
