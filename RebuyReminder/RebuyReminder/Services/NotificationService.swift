@@ -41,17 +41,24 @@ class NotificationService {
             return
         }
 
+        // Use KST (Korea Standard Time) for date calculations
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
+
+        let today = calendar.startOfDay(for: Date())
+        let lastPurchase = calendar.startOfDay(for: item.lastPurchaseDate ?? Date())
+
         // Calculate notification date
-        guard let rebuyDate = Calendar.current.date(
+        guard let rebuyDate = calendar.date(
             byAdding: .day,
             value: Int(item.cycleDays),
-            to: item.lastPurchaseDate ?? Date()
+            to: lastPurchase
         ) else {
             print("❌ Cannot calculate rebuy date")
             return
         }
 
-        guard let notificationDate = Calendar.current.date(
+        guard let notificationDate = calendar.date(
             byAdding: .day,
             value: -daysBefore,
             to: rebuyDate
@@ -61,7 +68,7 @@ class NotificationService {
         }
 
         // Don't schedule if notification date is in the past
-        if notificationDate <= Date() {
+        if notificationDate <= today {
             print("⚠️ Notification date is in the past, skipping: \(itemName)")
             return
         }
@@ -71,10 +78,10 @@ class NotificationService {
         content.title = itemName
 
         // Calculate days since last purchase for context
-        let daysSincePurchase = Calendar.current.dateComponents(
+        let daysSincePurchase = calendar.dateComponents(
             [.day],
-            from: item.lastPurchaseDate ?? Date(),
-            to: Date()
+            from: lastPurchase,
+            to: today
         ).day ?? 0
 
         // Korean localization
@@ -94,7 +101,7 @@ class NotificationService {
         ]
 
         // Create trigger
-        let triggerDate = Calendar.current.dateComponents(
+        let triggerDate = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute],
             from: notificationDate
         )
@@ -132,16 +139,23 @@ class NotificationService {
             return
         }
 
+        // Use KST (Korea Standard Time) for date calculations
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
+
+        let today = calendar.startOfDay(for: Date())
+        let lastPurchase = calendar.startOfDay(for: item.lastPurchaseDate ?? Date())
+
         // Calculate notification date
-        guard let rebuyDate = Calendar.current.date(
+        guard let rebuyDate = calendar.date(
             byAdding: .day,
             value: Int(item.cycleDays),
-            to: item.lastPurchaseDate ?? Date()
+            to: lastPurchase
         ) else {
             return
         }
 
-        guard var notificationDate = Calendar.current.date(
+        guard var notificationDate = calendar.date(
             byAdding: .day,
             value: -daysBefore,
             to: rebuyDate
@@ -150,8 +164,8 @@ class NotificationService {
         }
 
         // Set the custom time
-        let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: time)
-        notificationDate = Calendar.current.date(
+        let timeComponents = calendar.dateComponents([.hour, .minute], from: time)
+        notificationDate = calendar.date(
             bySettingHour: timeComponents.hour ?? 9,
             minute: timeComponents.minute ?? 0,
             second: 0,
@@ -159,7 +173,7 @@ class NotificationService {
         ) ?? notificationDate
 
         // Don't schedule if in the past
-        if notificationDate <= Date() {
+        if notificationDate <= today {
             print("⚠️ Notification date is in the past, skipping: \(itemName)")
             return
         }
@@ -184,7 +198,7 @@ class NotificationService {
         ]
 
         // Create trigger with custom time
-        let triggerDate = Calendar.current.dateComponents(
+        let triggerDate = calendar.dateComponents(
             [.year, .month, .day, .hour, .minute],
             from: notificationDate
         )
@@ -296,15 +310,22 @@ class NotificationService {
 
     /// Update app badge count to match overdue items
     func updateBadgeCount(for items: [Item]) {
+        // Use KST (Korea Standard Time) for date calculations
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
+
+        let today = calendar.startOfDay(for: Date())
+
         let overdueCount = items.filter { item in
-            guard let nextPurchaseDate = Calendar.current.date(
+            let lastPurchase = calendar.startOfDay(for: item.lastPurchaseDate ?? Date())
+            guard let nextPurchaseDate = calendar.date(
                 byAdding: .day,
                 value: Int(item.cycleDays),
-                to: item.lastPurchaseDate ?? Date()
+                to: lastPurchase
             ) else {
                 return false
             }
-            return nextPurchaseDate <= Date()
+            return nextPurchaseDate <= today
         }.count
 
         UNUserNotificationCenter.current().setBadgeCount(overdueCount) { error in

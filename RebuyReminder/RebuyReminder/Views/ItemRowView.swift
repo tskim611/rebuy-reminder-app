@@ -1,13 +1,35 @@
 import SwiftUI
 import CoreData
 
+// Custom button style with scale animation
+struct ScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.92 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
+
 struct ItemRowView: View {
     @ObservedObject var item: Item
     @Environment(\.managedObjectContext) private var viewContext
 
     var daysUntilRebuy: Int {
-        let nextPurchaseDate = Calendar.current.date(byAdding: .day, value: Int(item.cycleDays), to: item.lastPurchaseDate ?? Date()) ?? Date()
-        return Calendar.current.dateComponents([.day], from: Date(), to: nextPurchaseDate).day ?? 0
+        // Use KST (Korea Standard Time) for date calculations
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
+
+        // Get today's date at midnight KST
+        let today = calendar.startOfDay(for: Date())
+
+        // Get last purchase date at midnight KST
+        let lastPurchase = calendar.startOfDay(for: item.lastPurchaseDate ?? Date())
+
+        // Calculate next purchase date
+        let nextPurchaseDate = calendar.date(byAdding: .day, value: Int(item.cycleDays), to: lastPurchase) ?? today
+
+        // Calculate days difference
+        return calendar.dateComponents([.day], from: today, to: nextPurchaseDate).day ?? 0
     }
 
     var statusColor: Color {
@@ -59,10 +81,16 @@ struct ItemRowView: View {
                     .background(Color.blue)
                     .cornerRadius(8)
             }
+            .buttonStyle(ScaleButtonStyle())
         }
         .padding()
         .background(Color(.systemGray6).opacity(0.3))
         .cornerRadius(12)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            // Do nothing - prevents the entire card from being tappable
+            // Only the button should trigger the rebuy action
+        }
     }
 
     private func markAsRebought() {
