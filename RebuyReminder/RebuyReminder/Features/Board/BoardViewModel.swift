@@ -17,6 +17,7 @@ final class BoardViewModel: ObservableObject {
 
     // Load items from CoreData
     func loadItems() {
+        print("📥 Loading items from CoreData...")
         let request = Item.fetchRequest()
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Item.lastPurchaseDate, ascending: true)
@@ -24,7 +25,9 @@ final class BoardViewModel: ObservableObject {
 
         do {
             let fetchedItems = try viewContext.fetch(request)
+            print("📦 Fetched \(fetchedItems.count) items from CoreData")
             items = fetchedItems.map { ItemModel(from: $0) }
+            print("✅ Items array updated. Count: \(items.count)")
         } catch {
             print("❌ Failed to fetch items: \(error)")
         }

@@ -108,9 +108,11 @@ struct BoardView: View {
             }
             .onChange(of: showingAddItem) { isShowing in
                 if !isShowing {
-                    // Sheet was dismissed, reload items
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    // Sheet was dismissed, reload items after a delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        print("🔄 Reloading items after sheet dismissal...")
                         vm.loadItems()
+                        print("✅ Items reloaded. Count: \(vm.items.count)")
                     }
                 }
             }
