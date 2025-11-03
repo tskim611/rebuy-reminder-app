@@ -105,16 +105,14 @@ struct BoardView: View {
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
                     .environment(\.managedObjectContext, viewContext)
-            }
-            .onChange(of: showingAddItem) { isShowing in
-                if !isShowing {
-                    // Sheet was dismissed, reload items after a delay
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        print("🔄 Reloading items after sheet dismissal...")
-                        vm.loadItems()
-                        print("✅ Items reloaded. Count: \(vm.items.count)")
+                    .onDisappear {
+                        // Reload when add item sheet disappears
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            print("🔄 Reloading items after sheet disappear...")
+                            vm.loadItems()
+                            print("✅ Items reloaded. Count: \(vm.items.count)")
+                        }
                     }
-                }
             }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
