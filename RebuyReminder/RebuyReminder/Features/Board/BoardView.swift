@@ -101,8 +101,15 @@ struct BoardView: View {
             }
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
-            } onDismiss: {
-                vm.loadItems() // Reload items when add sheet closes
+            }
+            .onChange(of: showingAddItem) { isShowing in
+                if !isShowing {
+                    // Sheet was dismissed, reload items
+                    Task {
+                        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 second delay
+                        vm.loadItems()
+                    }
+                }
             }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
