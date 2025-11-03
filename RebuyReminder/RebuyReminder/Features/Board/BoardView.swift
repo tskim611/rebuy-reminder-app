@@ -131,6 +131,11 @@ struct BoardView: View {
                 updateBadgeCount()
                 vm.loadItems() // Reload items when view appears
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ItemAdded"))) { _ in
+                print("🔔 Received ItemAdded notification, reloading items...")
+                vm.loadItems()
+                print("✅ Items reloaded after notification")
+            }
             .onChange(of: vm.items.count) { _ in
                 updateBadgeCount()
             }

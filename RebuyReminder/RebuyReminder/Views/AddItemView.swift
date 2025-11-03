@@ -97,13 +97,19 @@ struct AddItemView: View {
             do {
                 try viewContext.save()
 
+                print("✅ Item saved to CoreData: \(newItem.name ?? "")")
+
                 // Schedule notification for the new item
                 NotificationService.shared.scheduleNotification(for: newItem)
+
+                // Post notification to reload board
+                NotificationCenter.default.post(name: NSNotification.Name("ItemAdded"), object: nil)
+                print("📢 Posted ItemAdded notification")
 
                 dismiss()
             } catch {
                 let nsError = error as NSError
-                print("Error saving item: \(nsError), \(nsError.userInfo)")
+                print("❌ Error saving item: \(nsError), \(nsError.userInfo)")
             }
         }
     }
