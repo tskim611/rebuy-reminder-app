@@ -57,11 +57,12 @@ struct ItemModel: Identifiable, Equatable, Hashable {
     // Map category to emoji icon
     static func iconForCategory(_ category: String?) -> String {
         switch category {
-        case "건강": return "💊"
-        case "식료품": return "🥛"
-        case "개인 위생": return "🧴"
-        case "생활용품": return "🧻"
-        case "반려동물": return "🐾"
+        case "health": return "💊"
+        case "pantry": return "🥛"
+        case "personal_care": return "🧴"
+        case "household": return "🧻"
+        case "pet_care": return "🐾"
+        case "other": return "📦"
         default: return "📦"
         }
     }
