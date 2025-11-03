@@ -12,8 +12,15 @@ struct BoardView: View {
     private var coreDataItems: FetchedResults<Item>
 
     // Convert CoreData items to ItemModel for UI
+    // Force recomputation by using coreDataItems.count as a dependency
     private var items: [ItemModel] {
-        coreDataItems.map { ItemModel(from: $0) }
+        print("🔄 BoardView.items computed - coreDataItems.count: \(coreDataItems.count)")
+        let result = coreDataItems.map { item in
+            print("🔄 Converting CoreData item: \(item.name ?? "") with category: \(item.category ?? "nil")")
+            return ItemModel(from: item)
+        }
+        print("🔄 Finished converting \(result.count) items")
+        return result
     }
 
     @State private var showingAddItem = false
