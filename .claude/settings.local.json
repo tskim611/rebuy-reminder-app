@@ -11,7 +11,10 @@
       "Bash(git commit:*)",
       "Bash(tree:*)",
       "Bash(dir /s /b:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(git pull:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)"
     ],
     "deny": [],
     "ask": []

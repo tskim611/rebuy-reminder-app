@@ -13,7 +13,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Firebase Analytics integration
 - StoreKit in-app purchase implementation
 - App Store assets & screenshots
-- TestFlight beta deployment
+
+---
+
+## [1.0] - Build 9 - 2025-11-03
+
+### Beta Feedback Fixes
+
+#### Fixed
+- **Time Calculation** - Fixed date calculations to use KST (Korea Standard Time) instead of device timezone
+  - Ensures consistent notification scheduling for Korean users
+  - Fixes edge cases where timezone differences caused incorrect due date calculations
+
+- **Card Tap Behavior** - Fixed item card tap interaction
+  - Only the "재구매함" (Rebought) button triggers the rebuy action
+  - Tapping the card itself no longer accidentally marks items as rebought
+  - Improved user control and prevents accidental actions
+
+#### Added
+- **Motion Animations** - Enhanced user experience with smooth animations
+  - Button scale animation on tap for better tactile feedback
+  - Card entry animations when items are added
+  - Smooth delete animations when removing items
+  - All animations follow iOS design guidelines
 
 ---
 
