@@ -2,7 +2,20 @@ import SwiftUI
 import CoreData
 
 struct BoardView: View {
-    @StateObject private var vm: BoardViewModel
+    @Environment(\.managedObjectContext) private var viewContext
+
+    // Use @FetchRequest to automatically observe CoreData changes
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.lastPurchaseDate, ascending: true)],
+        animation: .default
+    )
+    private var coreDataItems: FetchedResults<Item>
+
+    // Convert CoreData items to ItemModel for UI
+    private var items: [ItemModel] {
+        coreDataItems.map { ItemModel(from: $0) }
+    }
+
     @State private var showingAddItem = false
     @State private var showingSettings = false
     @State private var showUndo: (Bool, ItemModel?) = (false, nil)
@@ -10,12 +23,7 @@ struct BoardView: View {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @State private var showingOnboarding = false
 
-    private let viewContext: NSManagedObjectContext
-
-    init(context: CoreData.NSManagedObjectContext = PersistenceController.shared.container.viewContext) {
-        self.viewContext = context
-        _vm = StateObject(wrappedValue: BoardViewModel(context: context))
-    }
+    private let notificationService = NotificationService.shared
 
     var body: some View {
         NavigationStack {
@@ -23,7 +31,7 @@ struct BoardView: View {
                 Theme.bg.edgesIgnoringSafeArea(.all)
 
                 Group {
-                    if vm.items.isEmpty {
+                    if items.isEmpty {
                         // Empty state
                         VStack(spacing: 16) {
                             Text(NSLocalizedString("empty.allStocked", comment: ""))
@@ -40,10 +48,10 @@ struct BoardView: View {
                     } else {
                         // Card list
                         List {
-                            ForEach(Array(vm.items.enumerated()), id: \.element.id) { index, item in
+                            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                                 ItemCard(item: item) {
                                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                                        vm.markRebought(item)
+                                        markRebought(item)
                                     }
                                     Haptics.light()
                                 }
@@ -57,13 +65,13 @@ struct BoardView: View {
                                 .animation(
                                     .spring(response: 0.4, dampingFraction: 0.8)
                                         .delay(Double(index) * 0.02),
-                                    value: vm.items.count
+                                    value: items.count
                                 )
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(role: .destructive) {
                                         let deleted = item
                                         withAnimation(.easeInOut(duration: 0.22)) {
-                                            vm.delete(item)
+                                            delete(item)
                                         }
                                         Haptics.medium()
                                         showUndo = (true, deleted)
@@ -105,14 +113,6 @@ struct BoardView: View {
             .sheet(isPresented: $showingAddItem) {
                 AddItemView()
                     .environment(\.managedObjectContext, viewContext)
-                    .onDisappear {
-                        // Reload when add item sheet disappears
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            print("🔄 Reloading items after sheet disappear...")
-                            vm.loadItems()
-                            print("✅ Items reloaded. Count: \(vm.items.count)")
-                        }
-                    }
             }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
@@ -129,14 +129,8 @@ struct BoardView: View {
                 }
                 requestNotificationPermissionIfNeeded()
                 updateBadgeCount()
-                vm.loadItems() // Reload items when view appears
             }
-            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("ItemAdded"))) { _ in
-                print("🔔 Received ItemAdded notification, reloading items...")
-                vm.loadItems()
-                print("✅ Items reloaded after notification")
-            }
-            .onChange(of: vm.items.count) { _ in
+            .onChange(of: coreDataItems.count) { _ in
                 updateBadgeCount()
             }
             .toast(isPresented: $showUndo.0) {
@@ -146,7 +140,7 @@ struct BoardView: View {
                     action: {
                         if let item = showUndo.1 {
                             withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
-                                vm.restore(item)
+                                restore(item)
                             }
                             showUndo = (false, nil)
                         }
@@ -155,6 +149,69 @@ struct BoardView: View {
             }
         }
         .preferredColorScheme(.dark)
+    }
+
+    // MARK: - Actions
+
+    private func delete(_ item: ItemModel) {
+        guard let coreDataItem = item.coreDataItem else { return }
+
+        // Cancel notifications
+        if item.notificationEnabled {
+            notificationService.cancelNotification(for: coreDataItem)
+        }
+
+        // Delete from CoreData
+        viewContext.delete(coreDataItem)
+
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Failed to delete item: \(error)")
+        }
+    }
+
+    private func markRebought(_ item: ItemModel) {
+        guard let coreDataItem = item.coreDataItem else { return }
+
+        // Update last purchase date
+        coreDataItem.lastPurchaseDate = Date()
+
+        // Reschedule notification
+        if item.notificationEnabled {
+            notificationService.scheduleNotification(for: coreDataItem)
+        }
+
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Failed to mark rebought: \(error)")
+        }
+    }
+
+    private func restore(_ item: ItemModel) {
+        // Create new CoreData item
+        let newItem = Item(context: viewContext)
+        newItem.id = item.id
+        newItem.name = item.name
+        newItem.category = item.category
+        newItem.lastPurchaseDate = item.lastBought
+        newItem.cycleDays = Int32(item.cycleDays)
+        newItem.notes = item.notes
+        newItem.notificationEnabled = item.notificationEnabled
+        newItem.isCompleted = false
+        newItem.createdDate = Date()
+
+        // Schedule notification
+        if item.notificationEnabled {
+            notificationService.scheduleNotification(for: newItem)
+        }
+
+        do {
+            try viewContext.save()
+        } catch {
+            print("❌ Failed to restore item: \(error)")
+        }
     }
 
     private func requestNotificationPermissionIfNeeded() {
@@ -174,7 +231,6 @@ struct BoardView: View {
 
     private func updateBadgeCount() {
         // Get CoreData items for badge count
-        let coreDataItems = vm.items.compactMap { $0.coreDataItem }
-        NotificationService.shared.updateBadgeCount(for: coreDataItems)
+        NotificationService.shared.updateBadgeCount(for: Array(coreDataItems))
     }
 }

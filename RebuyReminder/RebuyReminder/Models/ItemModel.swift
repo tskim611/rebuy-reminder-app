@@ -31,7 +31,13 @@ struct ItemModel: Identifiable, Equatable, Hashable {
     // Initialize from CoreData Item
     init(from item: Item) {
         self.id = item.id ?? UUID()
+
+        // Debug: Print category value from CoreData
+        print("🔍 ItemModel.init - Creating item '\(item.name ?? "")' with category: '\(item.category ?? "nil")'")
+
         self.icon = ItemModel.iconForCategory(item.category)
+        print("🎯 ItemModel.init - Assigned icon: '\(self.icon)' for category: '\(item.category ?? "nil")'")
+
         self.name = item.name ?? ""
         self.lastBought = item.lastPurchaseDate ?? Date()
         self.cycleDays = Int(item.cycleDays)
