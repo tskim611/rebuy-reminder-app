@@ -6,7 +6,8 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
-        BoardView(context: viewContext)
+        BoardView()
+            .environment(\.managedObjectContext, viewContext)
     }
 }
 
