@@ -37,7 +37,22 @@ struct BoardView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Theme.bg.edgesIgnoringSafeArea(.all)
+                // Background with gradient
+                ZStack {
+                    Theme.bg.edgesIgnoringSafeArea(.all)
+
+                    // Green sprout gradient at top
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.7, green: 0.9, blue: 0.7).opacity(0.3),  // Light sprout green
+                            Color(red: 0.85, green: 0.95, blue: 0.85).opacity(0.2), // Very light green
+                            Color.clear
+                        ]),
+                        startPoint: .top,
+                        endPoint: .center
+                    )
+                    .edgesIgnoringSafeArea(.all)
+                }
 
                 Group {
                     if items.isEmpty {
