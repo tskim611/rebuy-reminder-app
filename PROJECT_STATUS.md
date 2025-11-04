@@ -1,16 +1,17 @@
 # Project Status - 다 떨어지기 전에
 
 **Last Updated:** 2025-11-04
-**Current Version:** Build 12 (In Testing)
-**Phase:** 0.5 (UI Redesign) - **COMPLETE ✅**
+**Current Version:** Build 13 (Ready for TestFlight)
+**Phase:** 0.6 (UI Enhancement) - **COMPLETE ✅**
 
 ---
 
-## 🎯 Current Status: BUILD 12 SHIPPED TO TESTFLIGHT
+## 🎯 Current Status: BUILD 13 READY FOR TESTFLIGHT
 
 **Phase 0 Completion:** 100% ✅
 **Phase 0.5 (UI Redesign):** 100% ✅ ALL BUGS FIXED
-**Build Status:** ✅ Build 12 on TestFlight (working)
+**Phase 0.6 (UI Enhancement):** 100% ✅ NEW FEATURES ADDED
+**Build Status:** ✅ Build 13 tested and ready to ship
 **Documentation:** ✅ Complete
 **Repository:** ✅ Feature branch pushed
 **Code Quality:** ✅ Production ready
@@ -27,8 +28,11 @@
 | **Build 10 (TestFlight)** | ❌ Failed | Broken (archived) |
 | **Build 11 (TestFlight)** | ❌ Failed | Broken (archived) |
 | **Build 12 (TestFlight)** | ✅ SHIPPED | 100% WORKING |
-| **Critical Bug #1** | ✅ FIXED | @FetchRequest solution |
-| **Critical Bug #2** | ✅ FIXED | Icon mapping works |
+| **Build 13 (Ready)** | ✅ TESTED | Ready for TestFlight |
+| **Light Theme** | ✅ COMPLETE | Enhanced UI |
+| **Tap-to-Edit** | ✅ COMPLETE | Full edit functionality |
+| **Green Gradient BG** | ✅ COMPLETE | Fresh sprout theme |
+| **Enhanced Shadows** | ✅ COMPLETE | Better card depth |
 | **Apple Dev Account** | ✅ Active | 100% |
 | **TestFlight Setup** | ✅ Active | 100% |
 | **Git/GitHub** | ✅ Complete | 100% |
@@ -37,19 +41,31 @@
 
 ## 🚀 Immediate Action Items (Next Steps)
 
-### ✅ COMPLETED: Build 12 Successfully Shipped!
+### ✅ COMPLETED: Build 13 UI Enhancements!
 
-**Bug #1: Add Item Doesn't Refresh UI** - FIXED ✅
-- Solution: Replaced BoardViewModel with @FetchRequest for automatic CoreData observation
-- Implementation: SwiftUI @FetchRequest directly in BoardView
-- Result: Items now appear immediately after adding
-- Tested: Build 12 on real iPhone device - WORKING
+**New Feature #1: Light Theme + Enhanced Shadows** - COMPLETE ✅
+- Changed app theme from dark mode to light mode
+- Enhanced card shadows (radius: 8, y-offset: 4, opacity: 0.15)
+- Result: Cards have beautiful depth and visual separation
+- Tested: MacinCloud simulator - WORKING PERFECTLY
 
-**Bug #2: All Items Show Box Icon (📦)** - FIXED ✅
-- Solution: Icons were working correctly once @FetchRequest was implemented
-- Icons display: Health=💊, Pantry=🥛, Personal Care=🧴, Household=🧻, Pet=🐾, Other=📦
-- Result: All category icons display correctly
-- Tested: Build 12 on real iPhone device - WORKING
+**New Feature #2: Tap-to-Edit Functionality** - COMPLETE ✅
+- Added tap gesture to all item cards
+- Created EditItemView for full editing capabilities
+- Edit: name, category, cycle days, last purchase date, notes, notifications
+- Result: Users can now modify items by tapping cards
+- Tested: MacinCloud simulator - WORKING PERFECTLY
+
+**New Feature #3: Green Sprout Gradient Background** - COMPLETE ✅
+- Added fresh green gradient at top of screen
+- 4-color gradient (strong sprout green → light green → transparent)
+- Extends to 40% of screen height for visibility
+- Result: Fresh, natural feeling perfect for rebuy/restocking theme
+- Tested: MacinCloud simulator - WORKING PERFECTLY
+
+**Previous Fixes (Build 12):**
+- Bug #1: Add Item UI Refresh - FIXED with @FetchRequest
+- Bug #2: Icon Mapping - FIXED automatically
 
 ### 🟡 PRIORITY 2: Run Manual Tests (30-60 minutes) - **NOT STARTED**
 Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
@@ -161,11 +177,19 @@ Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
 **Actual Time:** 2 days (including debugging)
 **Actual Outcome:** Working app on TestFlight with 0 bugs - all features verified on real device
 
-### Week 2-3 (Nov 3-16) - Beta Testing & Feedback ← YOU ARE HERE
-- [x] ~~Fix all bugs discovered in Week 1~~ (Both bugs fixed)
+### Week 2-3 (Nov 3-16) - UI Enhancement & Testing ✅ COMPLETE
+- [x] ~~Fix all bugs discovered in Week 1~~ (Both bugs fixed in Build 12)
 - [x] ~~Test on physical device~~ (iPhone - working perfectly)
-- [ ] Invite beta testers to Build 12
-- [ ] Gather feedback on new card UI design
+- [x] ~~Implement light theme~~ (Build 13)
+- [x] ~~Add tap-to-edit functionality~~ (Build 13)
+- [x] ~~Add green gradient background~~ (Build 13)
+- [x] ~~Enhance card shadows~~ (Build 13)
+- [x] ~~Test all new features~~ (MacinCloud - all working)
+
+### Week 3-4 (Nov 17-30) - TestFlight Build 13 ← YOU ARE HERE
+- [ ] Deploy Build 13 to TestFlight
+- [ ] Invite beta testers to Build 13
+- [ ] Gather feedback on light theme + tap-to-edit
 - [ ] Complete all 20 test scenarios from TESTING_GUIDE.md
 - [ ] Consider Firebase dev project setup (optional)
 
@@ -204,13 +228,14 @@ Follow [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md):
 - **Verified On:** Build 12 (Simulator + Real iPhone) - All category icons display correctly
 - **Fixed Date:** 2025-11-04
 
-### Build History (Build 9 → Build 12)
+### Build History (Build 9 → Build 13)
 - **Build 9:** Original UI (worked perfectly)
 - **Build 10:** UI redesign (card layout) + 2 critical bugs discovered
 - **Build 11:** Attempted NotificationCenter fix (still broken)
 - **Build 12:** @FetchRequest solution ✅ ALL BUGS FIXED
+- **Build 13:** UI enhancements (light theme, tap-to-edit, green gradient, enhanced shadows) ✅ ALL WORKING
 
-**Current Blockers:** ✅ None - UI redesign complete and working!
+**Current Blockers:** ✅ None - Ready for TestFlight!
 
 ---
 
