@@ -41,15 +41,16 @@ struct BoardView: View {
                 ZStack {
                     Theme.bg.edgesIgnoringSafeArea(.all)
 
-                    // Green sprout gradient at top
+                    // Green sprout gradient at top - stronger and more visible
                     LinearGradient(
                         gradient: Gradient(colors: [
-                            Color(red: 0.7, green: 0.9, blue: 0.7).opacity(0.3),  // Light sprout green
-                            Color(red: 0.85, green: 0.95, blue: 0.85).opacity(0.2), // Very light green
+                            Color(red: 0.4, green: 0.8, blue: 0.5).opacity(0.6),  // Stronger sprout green
+                            Color(red: 0.6, green: 0.9, blue: 0.7).opacity(0.4),  // Medium light green
+                            Color(red: 0.8, green: 0.95, blue: 0.85).opacity(0.2), // Light green
                             Color.clear
                         ]),
                         startPoint: .top,
-                        endPoint: .center
+                        endPoint: UnitPoint(x: 0.5, y: 0.4)  // Extends lower for more visibility
                     )
                     .edgesIgnoringSafeArea(.all)
                 }
