@@ -25,6 +25,8 @@ struct BoardView: View {
 
     @State private var showingAddItem = false
     @State private var showingSettings = false
+    @State private var showingEditItem = false
+    @State private var itemToEdit: ItemModel?
     @State private var showUndo: (Bool, ItemModel?) = (false, nil)
     @State private var notificationPermissionGranted = false
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
@@ -45,7 +47,7 @@ struct BoardView: View {
                                 .font(TypoKR.title)
                                 .padding()
                                 .background(Theme.cardBG, in: RoundedRectangle(cornerRadius: Spacing.cardR))
-                                .shadow(color: Theme.shadow, radius: 4, y: 2)
+                                .shadow(color: Theme.shadow, radius: 8, x: 0, y: 4)
 
                             Text(NSLocalizedString("hint.swipeDelete", comment: ""))
                                 .font(TypoKR.sub)
@@ -56,12 +58,16 @@ struct BoardView: View {
                         // Card list
                         List {
                             ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                                ItemCard(item: item) {
+                                ItemCard(item: item, onRebought: {
                                     withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                                         markRebought(item)
                                     }
                                     Haptics.light()
-                                }
+                                }, onTap: {
+                                    itemToEdit = item
+                                    showingEditItem = true
+                                    Haptics.light()
+                                })
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets(top: 6, leading: Spacing.inset, bottom: 6, trailing: Spacing.inset))
@@ -121,6 +127,12 @@ struct BoardView: View {
                 AddItemView()
                     .environment(\.managedObjectContext, viewContext)
             }
+            .sheet(isPresented: $showingEditItem) {
+                if let item = itemToEdit {
+                    EditItemView(item: item)
+                        .environment(\.managedObjectContext, viewContext)
+                }
+            }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }
@@ -155,7 +167,7 @@ struct BoardView: View {
                 )
             }
         }
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(.light)
     }
 
     // MARK: - Actions

@@ -3,6 +3,7 @@ import SwiftUI
 struct ItemCard: View {
     let item: ItemModel
     let onRebought: () -> Void
+    let onTap: () -> Void
 
     var body: some View {
         HStack(spacing: Spacing.gap) {
@@ -36,8 +37,11 @@ struct ItemCard: View {
         }
         .padding()
         .background(Theme.cardBG, in: RoundedRectangle(cornerRadius: Spacing.cardR, style: .continuous))
-        .shadow(color: Theme.shadow, radius: 4, y: 2)
+        .shadow(color: Theme.shadow, radius: 8, x: 0, y: 4)
         .contentShape(RoundedRectangle(cornerRadius: Spacing.cardR, style: .continuous))
+        .onTapGesture {
+            onTap()
+        }
         .contextMenu {
             Button {
                 onRebought()

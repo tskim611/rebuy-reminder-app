@@ -29,6 +29,9 @@
 "add.cancel" = "취소";
 "add.save" = "저장";
 
+/* Edit Item */
+"edit.title" = "항목 수정";
+
 /* Categories */
 "category.health" = "건강";
 "category.pantry" = "식료품";
@@ -40,6 +43,7 @@
 /* Settings */
 "settings.title" = "설정";
 "settings.notifications" = "알림";
+"settings.notifications_enabled" = "알림 활성화";
 "settings.enable_reminders" = "알림 활성화";
 "settings.notification_settings" = "알림 설정";
 "settings.appearance" = "모양";

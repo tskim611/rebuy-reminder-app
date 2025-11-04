@@ -29,6 +29,9 @@
 "add.cancel" = "Cancel";
 "add.save" = "Save";
 
+/* Edit Item */
+"edit.title" = "Edit Item";
+
 /* Categories */
 "category.health" = "Health";
 "category.pantry" = "Pantry";
@@ -40,6 +43,7 @@
 /* Settings */
 "settings.title" = "Settings";
 "settings.notifications" = "Notifications";
+"settings.notifications_enabled" = "Enable notifications";
 "settings.enable_reminders" = "Enable Reminders";
 "settings.notification_settings" = "Notification Settings";
 "settings.appearance" = "Appearance";
