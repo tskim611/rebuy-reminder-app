@@ -1,19 +1,20 @@
 # Project Status - 다 떨어지기 전에
 
-**Last Updated:** 2025-11-04
-**Current Version:** Build 13 (Ready for TestFlight)
-**Phase:** 0.6 (UI Enhancement) - **COMPLETE ✅**
+**Last Updated:** 2025-11-06
+**Current Version:** Build 13 (On TestFlight) + Firebase Integration
+**Phase:** 0.7 (Firebase Analytics) - **COMPLETE ✅**
 
 ---
 
-## 🎯 Current Status: BUILD 13 READY FOR TESTFLIGHT
+## 🎯 Current Status: FIREBASE ANALYTICS INTEGRATED
 
 **Phase 0 Completion:** 100% ✅
 **Phase 0.5 (UI Redesign):** 100% ✅ ALL BUGS FIXED
 **Phase 0.6 (UI Enhancement):** 100% ✅ NEW FEATURES ADDED
-**Build Status:** ✅ Build 13 tested and ready to ship
+**Phase 0.7 (Firebase Analytics):** 100% ✅ INTEGRATED & READY
+**Build Status:** ✅ Build 13 on TestFlight + Firebase ready
 **Documentation:** ✅ Complete
-**Repository:** ✅ Feature branch pushed
+**Repository:** ✅ Feature branch needs push
 **Code Quality:** ✅ Production ready
 
 ---
@@ -28,11 +29,14 @@
 | **Build 10 (TestFlight)** | ❌ Failed | Broken (archived) |
 | **Build 11 (TestFlight)** | ❌ Failed | Broken (archived) |
 | **Build 12 (TestFlight)** | ✅ SHIPPED | 100% WORKING |
-| **Build 13 (Ready)** | ✅ TESTED | Ready for TestFlight |
+| **Build 13 (TestFlight)** | ✅ SHIPPED | 100% WORKING |
 | **Light Theme** | ✅ COMPLETE | Enhanced UI |
 | **Tap-to-Edit** | ✅ COMPLETE | Full edit functionality |
 | **Green Gradient BG** | ✅ COMPLETE | Fresh sprout theme |
 | **Enhanced Shadows** | ✅ COMPLETE | Better card depth |
+| **Firebase Project** | ✅ CREATED | Analytics enabled |
+| **Firebase SDK** | ✅ INSTALLED | v12.5.0 |
+| **AnalyticsService** | ✅ CREATED | Event tracking ready |
 | **Apple Dev Account** | ✅ Active | 100% |
 | **TestFlight Setup** | ✅ Active | 100% |
 | **Git/GitHub** | ✅ Complete | 100% |
@@ -40,6 +44,24 @@
 ---
 
 ## 🚀 Immediate Action Items (Next Steps)
+
+### ✅ COMPLETED: Firebase Analytics Integration!
+
+**Firebase Setup** - COMPLETE ✅
+- Created Firebase project with ktaesoo611@gmail.com
+- Registered iOS app (Bundle ID: com.tskim.RebuyReminder)
+- Downloaded and added GoogleService-Info.plist to Xcode
+- Installed Firebase SDK v12.5.0 (FirebaseCore + FirebaseAnalytics)
+- Configured Firebase in RebuyReminderApp.swift
+- Created AnalyticsService.swift for easy event tracking
+- Result: Ready to track user behavior and app usage
+- Status: Integrated and ready for Build 14
+
+**Analytics Events Prepared:**
+- item_added, item_edited, item_rebought, item_deleted, item_restored
+- Screen views tracking
+- Notification toggle tracking
+- User properties (total items count)
 
 ### ✅ COMPLETED: Build 13 UI Enhancements!
 
